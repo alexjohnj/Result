@@ -19,7 +19,7 @@ let result = Result(try JSONSerialization.jsonObject(with: data))
 ```
 
 If `jsonObject(with:)` throws, `result` will wrap the thrown error with a
-`.fail` case. Otherwise it will wrap the returned data with a `.success`
+`.fail` case. Otherwise it will wrap the returned data with a `.ok`
 case. You can do the inverse and convert a `Result<T>` to a throw (?) using the
 `dematerialize()` function:
 
@@ -64,7 +64,7 @@ public enum Result<T> {
     }
 
     /// Initialise from a `Result<T>` from an `T?`. If `T?` is nil, wrap `error`
-    /// in a `.fail` case, otherwise wrap `T` in a `.success` case.
+    /// in a `.fail` case, otherwise wrap `T` in a `.ok` case.
     ///
     /// - parameter val: Optional value to wrap.
     /// - parameter error: Error to wrap if `val` is `nil`.
@@ -77,7 +77,7 @@ public enum Result<T> {
 
     /// Initialise from the result of an implicit throwing function. If the
     /// function throws, wrap the throw error in a `.fail` case. Otherwise wrap
-    /// the return value in a `.success` case.
+    /// the return value in a `.ok` case.
     ///
     /// - parameter f: An implicit throwing function.
     public init(_ f: @autoclosure () throws -> T) {
@@ -86,7 +86,7 @@ public enum Result<T> {
 
     /// Initialise from the result of an throwing function. If the
     /// function throws, wrap the throw error in a `.fail` case. Otherwise wrap
-    /// the return value in a `.success` case.
+    /// the return value in a `.ok` case.
     ///
     /// - parameter f: An throwing function.
     public init(try f: () throws -> T) {
